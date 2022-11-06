@@ -1,12 +1,19 @@
 import Menu from './Menu';
+import {useGameOver} from '../hooks/useGameOver';
+
 const Game = ({ rows, columns}) => {
+  const [gameOver, setGameOver, resetGameOver] = useGameOver();
 
   const start = () => {
-    console.log('hello from start function');
+    resetGameOver();
   };
   return (
     <div className="Game">
-      <Menu onClick={start}/>
+      {gameOver ? (
+        <Menu onClick={start}/>
+      ):(
+        <p>Tetris</p>
+      )}
     </div>
   );
 };
