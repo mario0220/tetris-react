@@ -5,6 +5,7 @@ import GameStats from "./GameStats";
 import { useGameStats } from '../hooks/useGameStats';
 import Previews from './Previews';
 import { usePlayer } from '../hooks/usePlayer';
+import GameController from "./GameController";
 
 const Tetris = ({rows, columns, setGameOver}) => {
   const [gameStats, addLinesCleared] = useGameStats();
@@ -22,6 +23,13 @@ const Tetris = ({rows, columns, setGameOver}) => {
       <GameStats gameStats={gameStats} />
       <Board board={board}/>
       <Previews tetrominoes={player.tetrominoes} />
+      <GameController 
+        board={board}
+        gameStats={gameStats}
+        player={player}
+        setGameOver={setGameOver}
+        setPlayer={setPlayer}
+      />
     </div>
   );
 }
