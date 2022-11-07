@@ -27,8 +27,8 @@ export const TETROMINOES = {
   },
   O: {
     shape: [
-      [0, 0],
-      [0, 0]
+      [1, 1],
+      [1, 1]
     ],
     className: `${className} ${className}__o`
   },
