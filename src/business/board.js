@@ -59,7 +59,7 @@ export const nextBoard = ({board, player, resetPlayer, addLinesCleared }) => {
   });
 
 
-
+  //if it collided, mark the board cells as collided
   if(!player.isFastDropping) {  
     rows = transferToBoard({
       className: tetromino.className,
@@ -68,6 +68,24 @@ export const nextBoard = ({board, player, resetPlayer, addLinesCleared }) => {
       rows,
       shape: tetromino.shape
     });
+  }
+
+  //check for cleared lines
+  const blankRow = rows[0].map((_) => ({ ...defaultCell}));
+  let linesCleared = 0;
+  rows = rows.reduce((acc, row) => {
+    if(row.every((column) => column.occupied)) {
+      linesCleared++;
+      acc.unshift([...blankRow])
+    } else {
+      acc.push(row);
+    }
+
+    return acc;
+  }, []);
+
+  if(linesCleared > 0) {
+    addLinesCleared(linesCleared);
   }
 
   //if we collided, reset the player
